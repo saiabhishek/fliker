@@ -1,0 +1,39 @@
+<html ng-app="flikerApp">
+<head>
+  
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  <script src="controller.js"></script>
+    <script>
+		function OpenNewWindow(bigurl, width, height)
+		{
+		    var newWindow = window.open("", "pictureViewer", "location=no, directories=no, fullscreen=no, menubar=no, status=no, toolbar=no, width=" + width + ", height=" + height + ", scrollbars=no");
+		    newWindow.document.writeln("<html>");
+		    newWindow.document.writeln("<body style='margins: 0 0 0 0;'>");
+		    newWindow.document.writeln("<a href='javascript:window.close();'>");
+		    newWindow.document.writeln("<img src='" + bigurl + "' alt='Click to close' id='bigImage' border='0'/>");
+		    newWindow.document.writeln("</a>");
+		    newWindow.document.writeln("</body></html>");
+		    newWindow.document.close();
+		}
+	</script>
+
+</head>
+<body ng-controller="fliker">
+<center><form ng-submit="submit()" >
+    <input type="text" ng-model="text" name="text"/>
+    <input type="submit" id="submit" value="submit"/>
+    <pre>Your search results of {{list}}</pre>
+    </form></center>
+    <div class="container">
+       <div class="row">
+    <div class="col-xs-12 col-md-8">
+      <div ng-repeat="i in images.items" class="added-img" style="display:inline-block; padding:10px">
+          <a href="#" onclick="OpenNewWindow('{{i.media.m}}', 577, 410); return true;">
+        <img class="added-img" ng-src="{{i.media.m}}" width="250px" height="300px" border="5" >
+        <figcaption>{{i.title}}</figcaption></a>
+      </div>
+         </div>
+    </div>
+    </div>
+</body>
+</html>#fliker controller.js
